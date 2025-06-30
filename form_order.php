@@ -100,15 +100,19 @@
 				else {
 					// Запись контакта
 					$sql_contact = "INSERT INTO contacts (Name, SecondName, LastName)" 
-					. "VALUES ('" . $_REQUEST['user_name'] . "', '" . $_REQUEST['user_second_name']
+					. "VALUES ('" . $_REQUEST['user_name'] 
+					. "', '" . $_REQUEST['user_second_name']
 					."', '" . $_REQUEST['user_last_name'] . "')";
 					$result = mysqli_query($link, $sql_contact);
 					$contact_id = mysqli_insert_id($link);
 
 					// Запись заказа
-					$sql_order = "INSERT INTO orders (City, Street, House, Flat)" 
-					. "VALUES ('" . $_REQUEST['user_address_city'] . "', '" . $_REQUEST['user_address_street']
-					."', '" . $_REQUEST['user_address_house'] ."', '" . $_REQUEST['user_address_flat'] . "')";
+					$sql_order = "INSERT INTO orders (ContactId, City, Street, House, Flat)" 
+					. "VALUES ('" . $contact_id 
+					. "', '" . $_REQUEST['user_address_city'] 
+					. "', '" . $_REQUEST['user_address_street'] 
+					. "', '" . $_REQUEST['user_address_house'] 
+					. "', '"  . $_REQUEST['user_address_flat'] . "')";
 					$result = $result && mysqli_query($link, $sql_order);
 					$order_id = mysqli_insert_id($link); 
 
